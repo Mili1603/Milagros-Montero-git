@@ -1,0 +1,58 @@
+create database distribuidora;
+
+use distribuidora;
+
+create table formas_pago(
+codforma tinyint not null primary key,
+nomforma varchar (50) ) engine=innodb;
+
+create table categorias(
+codcategoria tinyint not null primary key,
+nomcategoria varchar (50) ) engine=innodb;
+
+create table clientes(
+idcliente bigint (12) not null primary key,
+nombres varchar (200),
+correo varchar (200),
+direccion varchar (200),
+celular varchar (20),
+contraseña varchar (8) not null)engine=innodb;
+
+create table productos(
+codproducto smallint not null primary key,
+nombre varchar (200), 
+imagen varchar (255),
+descripcion text,
+cantidad smallint, 
+valor float, 
+proveedores varchar (200) not null)engine=innodb;
+
+create table proveedores(
+idproveedor bigint (12) not null primary key,
+nombre varchar (200),
+direccion varchar (200),
+celular varchar (20),
+correo varchar (200) not null)engine=innodb;
+
+create table inventario(
+codproducto smallint not null primary key,
+precio_compra float,
+precio_venta float,
+cant_stock  smallint,
+cant_minima smallint,
+cant_maxima smallint,
+proveedor bigint (12) not null)engine=innodb;
+
+create table factura(
+numfactura bigint (15) not null primary key,
+cliente bigint (12),
+productos smallint, 
+cantidad smallint, 
+valor float)engine=innodb;
+
+create table detalle_factura(
+idcliente bigint (12),
+codproducto smallint,
+cant_producto smallint,
+formas_pago tinyint not null primary key)engine=innodb;
+
